@@ -2,7 +2,7 @@ import './NavBar.css';
 
 export const NavBar = () => {
     return <div>
-        <nav className="navigation">
+        <nav>
             <ul className="navbar">
                 <li><a href="#">Baby Outfits</a></li>
                 <li><a href="#">Enteritos</a></li>
