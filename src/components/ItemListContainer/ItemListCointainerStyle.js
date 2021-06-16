@@ -1,8 +1,18 @@
 export const itemListCointainerStyle = theme => {
-    return({
+    return ({
         container: {
-            color : 'blue',
-            fontWeight: "bold"
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexDirection: 'row',
+            maxWidth: '100%',
+            margin :'3%',
+            padding: '3%',
+        },
+        loading: {
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
         }
     })
 }

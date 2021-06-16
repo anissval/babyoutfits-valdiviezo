@@ -1,18 +1,27 @@
 export const itemCountStyle = theme => {
     return({
         counterContainer: {
+            alignItems : 'center',
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+            height: 'auto',
+            maxWidth: '90%',
             '& > label': {
-                margin : '25px'
+               margin: '3%',
             }
         },
         divExternalStyle: {
-            width: '150px',
-            backgroundColor: '#4FD6D2',
             alignItems : 'center',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-around',
-            margin : '10px'
+            textAlign: 'center',
+            height: 'auto',
+            maxWidth: '100%',
+        },
+        quantity: {
+            margin:'3%',
         }
     })
 }

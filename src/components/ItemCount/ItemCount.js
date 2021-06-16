@@ -44,7 +44,8 @@ export const ItemCount = ({stock, initial}) => {
                 <div className={itemCountClass.counterContainer}>
                     <button disabled={_itemQuantity === 0} onClick={_stock !== 0 ? () => removeItem() : undefined}>-
                     </button>
-                    <label>{_itemQuantity}</label>
+                    <div className={itemCountClass.quantity}><h6>{_itemQuantity}</h6>
+                    </div>
                     <button disabled={(_itemQuantity === _stock)}
                             onClick={_itemQuantity <= _stock ? () => addItem() : undefined}>+
                     </button>

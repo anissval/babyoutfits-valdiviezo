@@ -11,11 +11,13 @@ export const navBarStyle = theme => {
             width: '95%',
             listStyle: 'none',
             padding : '2%',
-            fontFamily: 'Sofia, sans-serif',
             '& > li > a': {
                 color: 'white',
                 textDecoration: 'none',
             }
+        },
+        home : {
+            fontFamily: 'Sofia, sans-serif',
         }
     })
 }
