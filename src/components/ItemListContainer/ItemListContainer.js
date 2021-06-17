@@ -9,8 +9,7 @@ const useStyles = makeStyles((theme) => itemListCointainerStyle(theme));
 export const ItemListContainer = (props) => {
     const classes = useStyles();
     const {greeting} = props;
-    let [products, setProduct] = useState([]);
-    const [showSpinner, setShowSpinner] = useState(true);
+    const [products, setProducts] = useState([]);
     const mockData = babyProducts;
 
     const productsPromise = new Promise((resolve, reject) => {
@@ -23,12 +22,9 @@ export const ItemListContainer = (props) => {
 
     const getProducts = () => {
         setTimeout(() => {
-            setShowSpinner(true);
             productsPromise.then(result => {
-                setProduct(result);
-                setShowSpinner(false);
+                setProducts(result);
             }).catch(error => {
-                setShowSpinner(false);
                 console.log(error)
             })
         }, 2000);
@@ -38,7 +34,8 @@ export const ItemListContainer = (props) => {
         getProducts();
     }, []);
 
-    return (<>
+    return (
+        <>
             {
                 products.length === 0 ? <div className={classes.loading}><CircularProgress size={100}/></div> :
                     <div className={classes.container}>

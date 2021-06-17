@@ -4,7 +4,7 @@ import {makeStyles} from "@material-ui/core/styles";
 import {itemStyles} from "./ItemStyle";
 const useStyles = makeStyles((theme) => itemStyles(theme));
 
-export const Item = ({id, title, description, price, pictureUrl}) => {
+export const Item = ({id, productDescription,title, price, pictureUrl}) => {
 
     const classes = useStyles()
     return (<div className={classes.container}>
