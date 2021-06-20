@@ -11,6 +11,7 @@ export const itemDetailCointainerStyle = theme => {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
+            margin : '20%'
         }
     })
 }
