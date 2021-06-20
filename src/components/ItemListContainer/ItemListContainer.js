@@ -11,7 +11,7 @@ export const ItemListContainer = (props) => {
     const classes = useStyles();
     const [products, setProducts] = useState([]);
     const mockData = babyProducts;
-    const [showLoadind,setShowLoading] = useState(true);
+    const [showLoadind, setShowLoading] = useState(true);
     const {categoryID} = useParams();
 
     const productsPromise = new Promise((resolve, reject) => {
@@ -49,7 +49,7 @@ export const ItemListContainer = (props) => {
     return (
         <>
             {
-                showLoadind ? <div className={classes.loading}><CircularProgress size={100}/></div> :
+                showLoadind ? <div className={classes.loading}><CircularProgress size={60}/></div> :
                     <div className={classes.container}>
                         <ItemList products={products}></ItemList>
                     </div>
