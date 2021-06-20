@@ -16,12 +16,21 @@ export const itemDetailStyles = theme => {
                 maxWidth: '100%',
                 margin: '2%',
             },
-            itemDescription : {
+            itemDescription: {
                 display: 'flex',
                 alignItems: 'center',
                 flexDirection: 'column',
                 justifyContent: 'center',
                 padding: '2%'
+            },
+            paper: {
+                textAlign: 'center',
+                color: theme.palette.text.secondary,
+                justifyContent: 'center',
+                alignItems: 'center',
+                maxWidth: '90%',
+                maxHeight: '90%',
+                margin: '5%',
             }
         }
     )

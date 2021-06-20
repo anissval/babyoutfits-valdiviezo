@@ -3,7 +3,7 @@ export const appStyles = theme => {
         container: {
             justifyContent: 'center',
             alignItems: 'center',
-            maxWidth: '100%'
+            maxWidth: '100%',
         }
     })
 }

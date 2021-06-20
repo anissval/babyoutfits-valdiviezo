@@ -5,7 +5,6 @@ export const itemStyles = theme => {
                 justifyContent: 'center',
                 alignItems: 'center',
                 flexDirection: 'column',
-                maxWidth: '80%',
                 fontSize: 'calc(10px + 2vmin)',
             },
             imageStyle: {

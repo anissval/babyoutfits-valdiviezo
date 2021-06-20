@@ -1,12 +1,11 @@
 export const itemListStyles = theme => {
     return ({
             paper: {
-                padding: theme.spacing(1),
+                padding: theme.spacing(3),
                 textAlign: 'center',
                 color: theme.palette.text.secondary,
-                justifyContent: 'center',
                 alignItems: 'center',
-                maxWidth: '80%',
+                justifyContent: 'center',
             },
         }
     )

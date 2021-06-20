@@ -1,15 +1,18 @@
+import React from "react";
 import {NavBar} from "./components/NavBar/NavBar";
-import {ItemListContainer} from "./components/ItemListContainer/ItemListContainer";
 import {makeStyles} from "@material-ui/core";
 import {appStyles} from "./AppStyles";
-import {ItemDetailContainer} from "./components/Item/ItemDetailContainer";
+import {BrowserRouter} from "react-router-dom";
+import {AppRouter} from "./components/Navigation/AppRouter";
 
 const useStyles = makeStyles((theme) => appStyles(theme));
 
 export const App = () => {
     const appClasses = useStyles();
     return <div className={appClasses.container}>
-        <NavBar/>
-        <ItemDetailContainer/>
+        <BrowserRouter>
+            <NavBar/>
+            <AppRouter/>
+        </BrowserRouter>
     </div>
 }

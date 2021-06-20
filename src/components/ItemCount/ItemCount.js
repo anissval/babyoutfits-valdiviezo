@@ -9,10 +9,6 @@ export const ItemCount = ({stock, initial}) => {
     let [_itemQuantity, setItemQuantity] = useState(initial);
     let [_stockAvailable, setStockAvailable] = useState(true);
 
-    useEffect(() => {
-        validateStock();
-    }, [_stock]);
-
     const validateStock = () => {
         if (_stock !== 0 && _itemQuantity <= _stock) {
             setStockAvailable(true);
@@ -20,6 +16,10 @@ export const ItemCount = ({stock, initial}) => {
             setStockAvailable(false);
         }
     }
+
+    useEffect(() => {
+        validateStock();
+    }, [_stock]);
 
     const addItem = () => {
         if (_itemQuantity < _stock) {
@@ -44,7 +44,7 @@ export const ItemCount = ({stock, initial}) => {
                 <div className={itemCountClass.counterContainer}>
                     <button disabled={_itemQuantity === 0} onClick={_stock !== 0 ? () => removeItem() : undefined}>-
                     </button>
-                    <div className={itemCountClass.quantity}><h6>{_itemQuantity}</h6>
+                    <div className={itemCountClass.quantity}><label>{_itemQuantity}</label>
                     </div>
                     <button disabled={(_itemQuantity === _stock)}
                             onClick={_itemQuantity <= _stock ? () => addItem() : undefined}>+
