@@ -5,6 +5,7 @@ import {itemDetailCointainerStyle} from "./ItemDetailContainerStyles";
 import {ItemDetail} from "../ItemDetail/ItemDetail";
 import babyProducts from "../MockData/productListMock";
 import {useParams} from "react-router-dom";
+import {ItemCount} from "../ItemCount/ItemCount";
 
 const useStyles = makeStyles((theme) => itemDetailCointainerStyle(theme));
 
@@ -43,10 +44,7 @@ export const ItemDetailContainer = () => {
         <>
             {
                 (products.length === 0) ? (<div className={classes.loading}><CircularProgress size={100}/></div>) : (
-                    <ItemDetail id={products[0].id} title={products[0].title}
-                                description={products[0].productDescription}
-                                price={products[0].price}
-                                pictureUrl={products[0].pictureUrl}/>
+                    <ItemDetail product = {products[0]} component = {ItemCount}/>
                 )
             }
         </>

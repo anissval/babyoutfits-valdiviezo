@@ -31,6 +31,12 @@ export const itemDetailStyles = theme => {
                 maxWidth: '90%',
                 maxHeight: '90%',
                 margin: '5%',
+            },
+            groupButtons: {
+                '& > Button > Link': {
+                    textDecoration: 'none',
+                    color : 'black'
+                }
             }
         }
     )

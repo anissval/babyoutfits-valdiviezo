@@ -6,14 +6,14 @@ import {Link} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => itemStyles(theme));
 
-export const Item = ({id, productDescription, title, price, pictureUrl}) => {
+export const Item = ({product}) => {
 
     const classes = useStyles()
     return (<div className={classes.container}>
-        <Link to={{pathname: `/item/${id}`}}><img alt={'imagen del producto'} src={pictureUrl} key={id}
+        <Link to={{pathname: `/item/${product.id}`}}><img alt={'imagen del producto'} src={product.pictureUrl} key={product.id}
                                                   className={classes.imageStyle}/></Link>
-        <label>{title}</label>
-        <label>{price}</label>
-        <ItemCount stock={25} initial={0}/>
+        <label>{product.title}</label>
+        <label>{product.price}</label>
+        <ItemCount stock={product.stock} initial={0}/>
     </div>)
 }

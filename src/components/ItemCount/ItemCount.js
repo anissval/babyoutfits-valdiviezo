@@ -3,7 +3,7 @@ import {makeStyles} from "@material-ui/core";
 import {itemCountStyle} from "./ItemCountStyle";
 
 const useStyles = makeStyles((theme) => itemCountStyle(theme));
-export const ItemCount = ({stock, initial}) => {
+export const ItemCount = ({stock, onAddToCard, initial}) => {
     const itemCountClass = useStyles();
     let [_stock, setStock] = useState(stock);
     let [_itemQuantity, setItemQuantity] = useState(initial);
@@ -32,10 +32,12 @@ export const ItemCount = ({stock, initial}) => {
             setItemQuantity(_itemQuantity - 1);
         }
     }
-    const onAdd = () => {
+
+    const onAddToCartAndUpdateStock = () => {
         let updatedStock = (_stock - _itemQuantity);
         setStock(updatedStock);
         setItemQuantity(0);
+        onAddToCard();
     }
 
     return (
@@ -51,7 +53,8 @@ export const ItemCount = ({stock, initial}) => {
                     </button>
                 </div>
                 <button disabled={!_stockAvailable || _itemQuantity === 0}
-                        onClick={(_stockAvailable && _itemQuantity !== 0) ? () => onAdd() : undefined}>Agregar al
+                        onClick={(_stockAvailable && _itemQuantity !== 0) ? () => onAddToCartAndUpdateStock() : undefined}>Agregar
+                    al
                     carrito
                 </button>
             </div>

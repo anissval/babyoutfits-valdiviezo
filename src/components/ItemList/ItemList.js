@@ -12,10 +12,7 @@ export const ItemList = (props) => {
     const {products} = props || [];
     const listItems = products.map((product) => (
         <Grid item xs={4} key={product.id}>
-            <Paper className={itemListClasses.paper}><Item id={product.id} title={product.title}
-                                                           description={product.productDescription}
-                                                           price={product.price}
-                                                           pictureUrl={product.pictureUrl}/></Paper>
+            <Paper className={itemListClasses.paper}><Item product={product}/></Paper>
         </Grid>
     ));
 

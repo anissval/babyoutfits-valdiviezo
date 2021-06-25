@@ -4,6 +4,7 @@ import {ItemDetailContainer} from "../ItemDetailContainer/ItemDetailContainer";
 import {
     Route, Switch
 } from "react-router-dom";
+import {Cart} from "../Cart/Cart";
 
 export const AppRouter = () => {
 
@@ -14,6 +15,7 @@ export const AppRouter = () => {
                 <Route path="/ItemListContainer"><ItemListContainer/></Route>
                 <Route path="/category/:categoryID"><ItemListContainer/></Route>
                 <Route path="/item/:id"><ItemDetailContainer/></Route>
+                <Route path="/Cart"><Cart/></Route>
             </Switch>
         </>
     )
