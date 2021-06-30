@@ -1,17 +1,21 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import {itemDetailStyles} from "./ItemDetailStyles";
 import {Button, Paper} from "@material-ui/core";
 import {Link} from "react-router-dom";
+import {CartContext} from "../CartContext/CartContext";
 
 const useStyles = makeStyles((theme) => itemDetailStyles(theme));
 
 
 export const ItemDetail = ({product, component: CustumizedComponent}) => {
+    const {cartContent, addItem, removeItem, clear, isInCar} = useContext(CartContext);
+    const {itemQuantity} = useContext(CartContext);
     const [showCheckoutButtons, setShowCheckoutButtons] = useState(false);
     const classes = useStyles();
 
-    const onAddToCard = (quantity) => {
+    const onAddToCard = (e) => {
+        addItem(product, e.target.value);
         setShowCheckoutButtons(true);
     }
 
@@ -23,8 +27,13 @@ export const ItemDetail = ({product, component: CustumizedComponent}) => {
         return (
             <div>
                 <ul>
-                    <li style={{listStyle : 'none'}}><Button><Link to={'/Cart'} style={{textDecoration: 'none', color: 'black'}}>TERMINAR MI COMPRA</Link></Button></li>
-                    <li style={{listStyle : 'none'}}><Button onClick={handleCancel} style={{textDecoration: 'none', color: 'black'}}>CANCELAR</Button></li>
+                    <li style={{listStyle: 'none'}}><Button><Link to={'/Cart'}
+                                                                  style={{textDecoration: 'none', color: 'black'}}>TERMINAR
+                        MI COMPRA</Link></Button></li>
+                    <li style={{listStyle: 'none'}}><Button onClick={handleCancel} style={{
+                        textDecoration: 'none',
+                        color: 'black'
+                    }}>CANCELAR</Button></li>
                 </ul>
 
             </div>

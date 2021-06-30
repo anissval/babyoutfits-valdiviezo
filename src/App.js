@@ -4,15 +4,19 @@ import {makeStyles} from "@material-ui/core";
 import {appStyles} from "./AppStyles";
 import {BrowserRouter} from "react-router-dom";
 import {AppRouter} from "./components/Navigation/AppRouter";
+import {CartProvider} from "./components/CartContext/CartContext";
 
 const useStyles = makeStyles((theme) => appStyles(theme));
 
 export const App = () => {
     const appClasses = useStyles();
-    return <div className={appClasses.container}>
-        <BrowserRouter>
-            <NavBar/>
-            <AppRouter/>
-        </BrowserRouter>
-    </div>
+    return (<CartProvider>
+        <div className={appClasses.container}>
+            <BrowserRouter>
+                <NavBar/>
+                <AppRouter/>
+            </BrowserRouter>
+        </div>
+    </CartProvider>)
+
 }
