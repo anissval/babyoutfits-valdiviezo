@@ -6,23 +6,28 @@ export const CartProvider = (props) => {
     const initialQuantity = 0;
     const [cartContent, setCartContent] = useState([]);
     const [itemQuantity, setItemQuantity] = useState(initialQuantity);
+    const [totalItemsIntoCart, setTotalItemsIntoCart] = useState();
+    const [totalAmount, setTotalAmount] = useState(0);
     const addItem = (item, quantity) => {
-        setItemQuantity(quantity);
+        setItemQuantity(parseInt(quantity));
         const itemAddedToCart = isInCart(item.id);
         if (itemAddedToCart) {
-            updateItemQuantity(itemAddedToCart.item, itemAddedToCart.quantity, quantity);
+            updateItemQuantity(itemAddedToCart.item, itemAddedToCart.quantity, parseInt(quantity));
         } else {
-            const updatedCartContent = [...cartContent, createEntry(item, quantity)];
+            const updatedCartContent = [...cartContent, createEntry(item, parseInt(quantity))];
             setCartContent(updatedCartContent);
         }
+        calculateItemsIntoCart();
     }
     const removeItem = (itemId) => {
         const updatedCart = cartContent.filter((product) =>
-            product.id !== itemId);
+            product.item.id !== itemId);
         setCartContent(updatedCart);
+        calculateItemsIntoCart();
     }
     const clear = () => {
         setCartContent([])
+        calculateItemsIntoCart();
     }
     const isInCart = (id) => {
         const cartContentFiltered = cartContent.filter((entry) => entry.item.id === id);
@@ -38,14 +43,40 @@ export const CartProvider = (props) => {
             return entry.item.id !== item.id;
         });
         setCartContent([...oldItemRemovedFromCart, itemUpdated]);
+        calculateItemsIntoCart();
     }
     const createEntry = (item, quantity) => {
-        const newItem = {item: item, quantity: quantity}
+        const newItem = {item: item, quantity: parseInt(quantity)}
         return newItem;
     }
 
+    const calculateItemsIntoCart = () => {
+        let total = 0;
+        cartContent.map(item => {total = parseInt(total) + parseInt(item.quantity)}
+        )
+        setTotalItemsIntoCart(total);
+    }
 
-    return (<CartContext.Provider value={{cartContent, addItem, removeItem, clear, isInCart, itemQuantity}}>
+    const calculateTotalAmount = () => {
+        let totalAmount = 0;
+        cartContent.map(product => {
+            totalAmount = totalAmount + (parseInt(product.quantity) * parseInt(product.item.price));
+        })
+        setTotalAmount(totalAmount);
+    }
+
+    return (<CartContext.Provider
+            value={{
+                cartContent,
+                addItem,
+                removeItem,
+                clear,
+                isInCart,
+                itemQuantity,
+                totalItemsIntoCart,
+                calculateTotalAmount,
+                totalAmount
+            }}>
             {props.children}
         </CartContext.Provider>
     )

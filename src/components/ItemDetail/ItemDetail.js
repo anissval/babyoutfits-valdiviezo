@@ -2,16 +2,16 @@ import React, {useContext, useState} from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import {itemDetailStyles} from "./ItemDetailStyles";
 import {Button, Paper} from "@material-ui/core";
-import {Link} from "react-router-dom";
 import {CartContext} from "../CartContext/CartContext";
+import {useHistory} from "react-router-dom"
 
 const useStyles = makeStyles((theme) => itemDetailStyles(theme));
 
 
 export const ItemDetail = ({product, component: CustumizedComponent}) => {
-    const {cartContent, addItem, removeItem, clear, isInCar} = useContext(CartContext);
-    const {itemQuantity} = useContext(CartContext);
+    const {addItem, calculateTotalAmount} = useContext(CartContext);
     const [showCheckoutButtons, setShowCheckoutButtons] = useState(false);
+    const history = useHistory();
     const classes = useStyles();
 
     const onAddToCard = (e) => {
@@ -22,14 +22,19 @@ export const ItemDetail = ({product, component: CustumizedComponent}) => {
     const handleCancel = () => {
         setShowCheckoutButtons(false);
     }
+    const handleOnclick = (e) => {
+        calculateTotalAmount();
+        history.push("/Cart");
+    }
 
     const groupButtons = () => {
         return (
             <div>
                 <ul>
-                    <li style={{listStyle: 'none'}}><Button><Link to={'/Cart'}
-                                                                  style={{textDecoration: 'none', color: 'black'}}>TERMINAR
-                        MI COMPRA</Link></Button></li>
+                    <li style={{listStyle: 'none'}}><Button onClick={(e) => {
+                        handleOnclick(e)
+                    }}>TERMINAR
+                        MI COMPRA</Button></li>
                     <li style={{listStyle: 'none'}}><Button onClick={handleCancel} style={{
                         textDecoration: 'none',
                         color: 'black'
@@ -47,7 +52,7 @@ export const ItemDetail = ({product, component: CustumizedComponent}) => {
                 <div className={classes.itemDescription}>
                     <h3>{product.title}</h3>
                     {product.description}
-                    <h4>{product.price}</h4>
+                    <h4>${product.price}</h4>
                 </div>
                 {
                     showCheckoutButtons ? groupButtons() : <CustumizedComponent stock={product.stock}

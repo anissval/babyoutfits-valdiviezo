@@ -1,13 +1,12 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {makeStyles} from "@material-ui/core";
 import {itemCountStyle} from "./ItemCountStyle";
-import {CartContext} from "../CartContext/CartContext";
 
 const useStyles = makeStyles((theme) => itemCountStyle(theme));
 export const ItemCount = ({stock, onAddToCard, initial}) => {
     const itemCountClass = useStyles();
     let [_stock, setStock] = useState(stock);
-    const [quantity, setQuantity] = useState(0);
+    const [quantity, setQuantity] = useState(parseInt(0));
     let [_stockAvailable, setStockAvailable] = useState(true);
 
     const validateStock = () => {
@@ -53,7 +52,7 @@ export const ItemCount = ({stock, onAddToCard, initial}) => {
                             onClick={quantity <= _stock ? () => addItem() : undefined}>+
                     </button>
                 </div>
-                <button value={quantity} disabled={!_stockAvailable || quantity === 0}
+                <button value={parseInt(quantity)} disabled={!_stockAvailable || quantity === 0}
                         onClick={(_stockAvailable && quantity !== 0) ? onAddToCartAndUpdateStock : undefined}>Agregar
                     al
                     carrito
