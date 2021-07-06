@@ -30,6 +30,13 @@ export const cartStyles = theme => {
             flexDirection: 'row',
             listStyle: 'none',
             textAlign: 'center',
+        },
+        emptyCart : {
+            display: 'flex',
+            justifyContent: 'space-evenly',
+            alignItems: 'center',
+            flexDirection: 'column',
+            textAlign: 'center',
         }
     })
 }

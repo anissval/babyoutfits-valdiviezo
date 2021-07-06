@@ -68,7 +68,7 @@ export const Cart = () => {
                         <li><label></label></li>
                     </ul>
                 </div>
-            </div>) : (<div><label>Tu carrito esta vacio</label>
+            </div>) : (<div className={cartClasses.emptyCart}><label>Tu carrito esta vacio</label>
             <button onClick={handleHome}>Volver</button>
             </div>)
     )
