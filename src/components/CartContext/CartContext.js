@@ -14,20 +14,17 @@ export const CartProvider = (props) => {
         if (itemAddedToCart) {
             updateItemQuantity(itemAddedToCart.item, itemAddedToCart.quantity, parseInt(quantity));
         } else {
-            const updatedCartContent = [...cartContent, createEntry(item, parseInt(quantity))];
-            setCartContent(updatedCartContent);
+            const newEntry = createEntry(item, parseInt(quantity));
+            setCartContent([...cartContent,newEntry]);
         }
-        calculateItemsIntoCart();
     }
     const removeItem = (itemId) => {
         const updatedCart = cartContent.filter((product) =>
             product.item.id !== itemId);
         setCartContent(updatedCart);
-        calculateItemsIntoCart();
     }
     const clear = () => {
         setCartContent([])
-        calculateItemsIntoCart();
     }
     const isInCart = (id) => {
         const cartContentFiltered = cartContent.filter((entry) => entry.item.id === id);
@@ -43,7 +40,6 @@ export const CartProvider = (props) => {
             return entry.item.id !== item.id;
         });
         setCartContent([...oldItemRemovedFromCart, itemUpdated]);
-        calculateItemsIntoCart();
     }
     const createEntry = (item, quantity) => {
         const newItem = {item: item, quantity: parseInt(quantity)}
@@ -75,7 +71,8 @@ export const CartProvider = (props) => {
                 itemQuantity,
                 totalItemsIntoCart,
                 calculateTotalAmount,
-                totalAmount
+                totalAmount,
+                calculateItemsIntoCart
             }}>
             {props.children}
         </CartContext.Provider>

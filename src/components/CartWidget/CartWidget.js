@@ -9,9 +9,10 @@ const useStyles = makeStyles((theme) => cartWidgetStyle(theme));
 export const CartWidget = () => {
     const {totalItemsIntoCart} = useContext(CartContext);
     const cardWidgetclass = useStyles();
+
     return <div className={cardWidgetclass.container}>
         <Badge badgeContent={totalItemsIntoCart} color="primary">
-            <ShoppingCartIcon />
+            <ShoppingCartIcon/>
         </Badge>
     </div>
 }
