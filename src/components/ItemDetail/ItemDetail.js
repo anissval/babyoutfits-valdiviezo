@@ -22,7 +22,7 @@ export const ItemDetail = ({product, component: CustumizedComponent}) => {
     const handleCancel = () => {
         setShowCheckoutButtons(false);
     }
-    const handleOnclick = (e) => {
+    const handleOnclick = () => {
         calculateTotalAmount();
         history.push("/Cart");
     }
@@ -31,8 +31,8 @@ export const ItemDetail = ({product, component: CustumizedComponent}) => {
         return (
             <div>
                 <ul>
-                    <li style={{listStyle: 'none'}}><Button onClick={(e) => {
-                        handleOnclick(e)
+                    <li style={{listStyle: 'none'}}><Button onClick={() => {
+                        handleOnclick()
                     }}>TERMINAR
                         MI COMPRA</Button></li>
                     <li style={{listStyle: 'none'}}><Button onClick={handleCancel} style={{
@@ -48,7 +48,7 @@ export const ItemDetail = ({product, component: CustumizedComponent}) => {
         <Paper className={classes.paper}>
             <div className={classes.container}>
                 <img alt={'imagen del producto'} src={product.pictureUrl} key={product.id}
-                     className={classes.imageStyle}/>
+                     className={classes.image}/>
                 <div className={classes.itemDescription}>
                     <h3>{product.title}</h3>
                     {product.description}

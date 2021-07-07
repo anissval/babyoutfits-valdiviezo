@@ -48,16 +48,15 @@ export const CartProvider = (props) => {
 
     const calculateItemsIntoCart = () => {
         let total = 0;
-        cartContent.map(item => {total = parseInt(total) + parseInt(item.quantity)}
-        )
+        cartContent.forEach(item => {total = parseInt(total) + parseInt(item.quantity)});
         setTotalItemsIntoCart(total);
     }
 
     const calculateTotalAmount = () => {
         let totalAmount = 0;
-        cartContent.map(product => {
+        cartContent.forEach(product => {
             totalAmount = totalAmount + (parseInt(product.quantity) * parseInt(product.item.price));
-        })
+        });
         setTotalAmount(totalAmount);
     }
 

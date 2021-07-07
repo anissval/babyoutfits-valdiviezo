@@ -6,7 +6,7 @@ const useStyles = makeStyles((theme) => itemCountStyle(theme));
 export const ItemCount = ({stock, onAddToCard, initial}) => {
     const itemCountClass = useStyles();
     let [_stock, setStock] = useState(stock);
-    const [quantity, setQuantity] = useState(parseInt(0));
+    const [quantity, setQuantity] = useState(initial);
     let [_stockAvailable, setStockAvailable] = useState(true);
 
     const validateStock = () => {
@@ -52,7 +52,7 @@ export const ItemCount = ({stock, onAddToCard, initial}) => {
                             onClick={quantity <= _stock ? () => addItem() : undefined}>+
                     </button>
                 </div>
-                <button value={parseInt(quantity)} disabled={!_stockAvailable || quantity === 0}
+                <button value={quantity} disabled={!_stockAvailable || quantity === 0}
                         onClick={(_stockAvailable && quantity !== 0) ? onAddToCartAndUpdateStock : undefined}>Agregar
                     al
                     carrito
