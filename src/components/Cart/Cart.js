@@ -14,7 +14,7 @@ export const Cart = () => {
     const history = useHistory();
 
     const handleDeleteItem = (e) => {
-        removeItem(parseInt(e.target.value));
+        removeItem(e.target.value);
     }
     const handleHome =() => {
         history.push("/");
