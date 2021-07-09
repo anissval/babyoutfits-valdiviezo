@@ -5,6 +5,7 @@ import {
     Route, Switch
 } from "react-router-dom";
 import {Cart} from "../Cart/Cart";
+import {OrderConfirmation} from "../OrderConfirmation/OrderConfirmation";
 
 export const AppRouter = () => {
 
@@ -16,6 +17,7 @@ export const AppRouter = () => {
                 <Route path="/category/:categoryID"><ItemListContainer/></Route>
                 <Route path="/item/:id"><ItemDetailContainer/></Route>
                 <Route path="/Cart"><Cart/></Route>
+                <Route path="/OrderConfirmation"><OrderConfirmation/></Route>
             </Switch>
         </>
     )

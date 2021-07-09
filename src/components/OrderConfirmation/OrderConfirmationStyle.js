@@ -1,4 +1,4 @@
-export const cartStyles = theme => {
+export const orderConfirmationStyle = theme => {
     return ({
             container: {
                 display: 'flex',
@@ -24,15 +24,6 @@ export const cartStyles = theme => {
                 listStyle: 'none',
                 textAlign: 'center',
             },
-            emptyCart: {
-                display: 'flex',
-                justifyContent: 'space-evenly',
-                alignItems: 'center',
-                flexDirection: 'column',
-                textAlign: 'center',
-
-
-            },
             loading: {
                 display: 'flex',
                 justifyContent: 'center',
@@ -42,6 +33,11 @@ export const cartStyles = theme => {
             margin: {
                 margin: theme.spacing(1),
             },
+            centerItems: {
+                justifyContent: 'center',
+                alignItems: 'center',
+                textAlign: 'center',
+            }
         }
     )
 }

@@ -1,4 +1,6 @@
 import React, {createContext, useState} from "react";
+import {database} from "../../Firebase/firebase";
+import firebase from 'firebase/app';
 
 export const CartContext = createContext();
 
@@ -8,6 +10,10 @@ export const CartProvider = (props) => {
     const [itemQuantity, setItemQuantity] = useState(initialQuantity);
     const [totalItemsIntoCart, setTotalItemsIntoCart] = useState();
     const [totalAmount, setTotalAmount] = useState(0);
+    const [orderID, setOrderID] = useState();
+    const [userInfo, setUserInfo] = useState();
+    const [confirmedItemsBought, setConfirmedItemsBought] = useState([]);
+
     const addItem = (item, quantity) => {
         setItemQuantity(parseInt(quantity));
         const itemAddedToCart = isInCart(item.id);
@@ -15,7 +21,7 @@ export const CartProvider = (props) => {
             updateItemQuantity(itemAddedToCart.item, itemAddedToCart.quantity, parseInt(quantity));
         } else {
             const newEntry = createEntry(item, parseInt(quantity));
-            setCartContent([...cartContent,newEntry]);
+            setCartContent([...cartContent, newEntry]);
         }
     }
     const removeItem = (itemId) => {
@@ -24,7 +30,11 @@ export const CartProvider = (props) => {
         setCartContent(updatedCart);
     }
     const clear = () => {
-        setCartContent([])
+        setTotalItemsIntoCart(0);
+        setCartContent([]);
+        setItemQuantity(0);
+        setTotalAmount(0);
+        setConfirmedItemsBought([]);
     }
     const isInCart = (id) => {
         const cartContentFiltered = cartContent.filter((entry) => entry.item.id === id);
@@ -48,7 +58,9 @@ export const CartProvider = (props) => {
 
     const calculateItemsIntoCart = () => {
         let total = 0;
-        cartContent.forEach(item => {total = parseInt(total) + parseInt(item.quantity)});
+        cartContent.forEach(item => {
+            total = parseInt(total) + parseInt(item.quantity)
+        });
         setTotalItemsIntoCart(total);
     }
 
@@ -58,6 +70,55 @@ export const CartProvider = (props) => {
             totalAmount = totalAmount + (parseInt(product.quantity) * parseInt(product.item.price));
         });
         setTotalAmount(totalAmount);
+    }
+
+    const confirmUserOrderData = (name, phone, email) => {
+        setUserInfo({name: name, phone: phone, email: email});
+        let itemsUpdated = [];
+        const items = cartContent.map((content) => {
+            const newItem = {
+                id: content.item.id,
+                title: content.item.title,
+                price: content.item.price,
+                quantity: content.quantity
+            }
+            itemsUpdated = [...confirmedItemsBought, newItem];
+            return (newItem);
+        });
+        setConfirmedItemsBought(itemsUpdated);
+        const newOrder = {
+            buyer: {name: name, phone: phone, email: email},
+            items: items,
+            date: firebase.firestore.Timestamp.fromDate(new Date()),
+            total: totalAmount
+        }
+        persistNewOrderIntoDataBase(newOrder, items);
+    };
+
+    const persistNewOrderIntoDataBase = (newOrder, items) => {
+        const orders = database.collection('orders');
+        orders.add(newOrder).then(({id}) => {
+            setOrderID(id);
+            updateStockIntoDataBase(items);
+        }).catch(error => {
+            console.log(error);
+        }).finally();
+    }
+
+    const updateStockIntoDataBase = (items) => {
+        const batch = database.batch();
+        items.forEach((entry) => {
+            const itemFound = cartContent.filter((content) => (content.item.id === entry.id));
+            const oldStock = itemFound[0].item.stock;
+            const updateItem = database.collection('productos').doc(entry.id);
+            const newStock = (parseInt(oldStock) - parseInt(entry.quantity));
+            batch.update(updateItem, {stock: newStock});
+        });
+        batch.commit().then(() => {
+            console.log("Stocks actualizados.")
+        }).catch((error) => {
+            console.log(error)
+        })
     }
 
     return (<CartContext.Provider
@@ -71,7 +132,11 @@ export const CartProvider = (props) => {
                 totalItemsIntoCart,
                 calculateTotalAmount,
                 totalAmount,
-                calculateItemsIntoCart
+                calculateItemsIntoCart,
+                confirmUserOrderData,
+                orderID,
+                userInfo,
+                confirmedItemsBought
             }}>
             {props.children}
         </CartContext.Provider>
