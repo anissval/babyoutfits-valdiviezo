@@ -28,6 +28,7 @@ export const CartProvider = (props) => {
         const updatedCart = cartContent.filter((product) =>
             product.item.id !== itemId);
         setCartContent(updatedCart);
+        calculateTotalAmount();
     }
     const clear = () => {
         setTotalItemsIntoCart(0);
@@ -82,7 +83,7 @@ export const CartProvider = (props) => {
                 price: content.item.price,
                 quantity: content.quantity
             }
-            itemsUpdated = [...confirmedItemsBought, newItem];
+            itemsUpdated = [...itemsUpdated, newItem];
             return (newItem);
         });
         setConfirmedItemsBought(itemsUpdated);

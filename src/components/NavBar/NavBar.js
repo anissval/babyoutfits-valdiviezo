@@ -13,6 +13,7 @@ export const NavBar = () => {
 
     useEffect(() => {
         calculateItemsIntoCart();
+        calculateTotalAmount();
     }, [cartContent])
 
     return (<div>
@@ -20,7 +21,7 @@ export const NavBar = () => {
             <li className={navBarClass.home}><Link to="/">Baby Outfits</Link></li>
             <li><Link to={{pathname: '/category/Bodies'}}>Bodies</Link></li>
             <li><Link to={{pathname: '/category/Abrigos'}}>Abrigos</Link></li>
-            {(totalItemsIntoCart > 0) && <li><Link to={{pathname: '/Cart'}}><CartWidget onClick={()=>{calculateTotalAmount()}}/></Link></li>}
+            {(totalItemsIntoCart > 0) && <li><Link to={{pathname: '/Cart'}}><CartWidget/></Link></li>}
         </ul>
     </div>)
 }

@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect} from "react";
 import {CartContext} from "../CartContext/CartContext";
 import Paper from "@material-ui/core/Paper";
 import {CircularProgress, Grid, IconButton, makeStyles} from "@material-ui/core";
@@ -13,6 +13,8 @@ export const Cart = () => {
     const cartClasses = useStyles();
     const {cartContent, totalAmount, removeItem} = useContext(CartContext);
     const history = useHistory();
+
+    useEffect(()=>{},[totalAmount,cartContent])
 
     const handleDeleteItem = (id) => {
         removeItem(id);
