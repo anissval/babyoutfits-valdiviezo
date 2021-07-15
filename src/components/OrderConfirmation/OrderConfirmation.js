@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => orderConfirmationStyle(theme));
 
 export const OrderConfirmation = () => {
     const orderConfirmationClasses = useStyles();
-    const {totalAmount, orderID, confirmedItemsBought, clear} = useContext(CartContext);
+    const {finalTotalAmount, orderID, confirmedItemsBought, clear} = useContext(CartContext);
     const history = useHistory();
 
     useEffect(() => {
@@ -47,10 +47,13 @@ export const OrderConfirmation = () => {
     return (
         (orderID) ?
             (<div className={orderConfirmationClasses.centerItems}><h1>Orden confirmada</h1>
+                    <p><Button variant="outlined" size="large" color="primary" onClick={() => handleHome()}>Volver al menu
+                        principal</Button>
+                    </p>
                     <label>{`ID DE LA ORDEN DE COMPRA : ${orderID}`}</label>
                     <div className={orderConfirmationClasses.container}>
                         <Grid container item xs={12} spacing={1}>
-                            <Grid item xs={6}>
+                            <Grid item xs={12} sm={12} md={6}>
                                 <Paper className={orderConfirmationClasses.paper}>
                                     <div>
                                         <ul className={orderConfirmationClasses.items}>
@@ -66,22 +69,20 @@ export const OrderConfirmation = () => {
                                             <ul className={orderConfirmationClasses.items}>
                                                 <li><label>Total : </label></li>
                                                 <li><label></label></li>
-                                                <li><label>${totalAmount}</label></li>
+                                                <li><label>${finalTotalAmount}</label></li>
                                                 <li><label></label></li>
                                             </ul>
                                         </div>
                                     </div>
                                 </Paper>
                             </Grid>
-                            <Grid item xs={6}>
+                            <Grid item xs={12} sm={12} md={6}>
                                 <Paper className={orderConfirmationClasses.paper}>
                                     <UserDataConfirmed/>
                                 </Paper>
                             </Grid>
                         </Grid>
                     </div>
-                    <Button variant="outlined" size="large" color="primary" onClick={handleHome}>Volver al menu
-                        principal</Button>
                 </div>
             )
             : (

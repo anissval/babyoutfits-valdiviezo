@@ -8,7 +8,7 @@ import {CartContext} from "../CartContext/CartContext";
 const useStyles = makeStyles((theme) => navBarStyle(theme));
 
 export const NavBar = () => {
-    const {totalItemsIntoCart, calculateItemsIntoCart, cartContent,calculateTotalAmount} = useContext(CartContext);
+    const {totalItemsIntoCart, calculateItemsIntoCart, cartContent, calculateTotalAmount} = useContext(CartContext);
     const navBarClass = useStyles();
 
     useEffect(() => {

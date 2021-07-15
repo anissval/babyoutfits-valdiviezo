@@ -1,12 +1,8 @@
 import React, {useContext} from "react";
 import {CartContext} from "../CartContext/CartContext";
-import {makeStyles} from "@material-ui/core";
-import {userDataConfirmedStyles} from "./UserDataConfirmedStyles";
-
-const useStyles = makeStyles((theme) => userDataConfirmedStyles(theme));
 
 export const UserDataConfirmed = () => {
-    const {confirmUserOrderData, userInfo} = useContext(CartContext);
+    const {userInfo} = useContext(CartContext);
 
     return (
         <form>

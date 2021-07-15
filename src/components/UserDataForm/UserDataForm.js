@@ -15,7 +15,7 @@ export const UserDataForm = () => {
     const {confirmUserOrderData} = useContext(CartContext);
     const history = useHistory();
 
-    const handleConfirmOrder = (e) => {
+    const handleConfirmOrder = () => {
         confirmUserOrderData(name, phone, email);
         history.push("/OrderConfirmation");
     }

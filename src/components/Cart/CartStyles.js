@@ -10,15 +10,15 @@ export const cartStyles = theme => {
                 margin: '1%',
                 padding: '1%',
             }, paper: {
-                padding: theme.spacing(3),
+                padding: theme.spacing(1),
                 textAlign: 'center',
                 color: theme.palette.text.secondary,
                 alignItems: 'center',
-                justifyContent: 'center',
+                justifyContent: 'space-between',
             },
             items: {
                 display: 'flex',
-                justifyContent: 'space-evenly',
+                justifyContent: 'space-between',
                 alignItems: 'center',
                 flexDirection: 'row',
                 listStyle: 'none',
@@ -30,8 +30,6 @@ export const cartStyles = theme => {
                 alignItems: 'center',
                 flexDirection: 'column',
                 textAlign: 'center',
-
-
             },
             loading: {
                 display: 'flex',

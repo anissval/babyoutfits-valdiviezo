@@ -11,7 +11,7 @@ export const ItemList = (props) => {
     const itemListClasses = useStyles();
     const {products} = props || [];
     const listItems = products.map((product) => (
-        <Grid item xs={4} key={product.id}>
+        <Grid item xs={12} sm={6} md={4} key={product.id}>
             <Paper className={itemListClasses.paper}><Item product={product}/></Paper>
         </Grid>
     ));

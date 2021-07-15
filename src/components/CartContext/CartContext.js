@@ -13,6 +13,7 @@ export const CartProvider = (props) => {
     const [orderID, setOrderID] = useState();
     const [userInfo, setUserInfo] = useState();
     const [confirmedItemsBought, setConfirmedItemsBought] = useState([]);
+    const [finalTotalAmount, setFinalTotalAmount] = useState();
 
     const addItem = (item, quantity) => {
         setItemQuantity(parseInt(quantity));
@@ -23,6 +24,7 @@ export const CartProvider = (props) => {
             const newEntry = createEntry(item, parseInt(quantity));
             setCartContent([...cartContent, newEntry]);
         }
+        calculateTotalAmount();
     }
     const removeItem = (itemId) => {
         const updatedCart = cartContent.filter((product) =>
@@ -87,6 +89,7 @@ export const CartProvider = (props) => {
             return (newItem);
         });
         setConfirmedItemsBought(itemsUpdated);
+        setFinalTotalAmount(totalAmount);
         const newOrder = {
             buyer: {name: name, phone: phone, email: email},
             items: items,
@@ -100,6 +103,7 @@ export const CartProvider = (props) => {
         const orders = database.collection('orders');
         orders.add(newOrder).then(({id}) => {
             setOrderID(id);
+            setCartContent([]);
             updateStockIntoDataBase(items);
         }).catch(error => {
             console.log(error);
@@ -137,7 +141,8 @@ export const CartProvider = (props) => {
                 confirmUserOrderData,
                 orderID,
                 userInfo,
-                confirmedItemsBought
+                confirmedItemsBought,
+                finalTotalAmount
             }}>
             {props.children}
         </CartContext.Provider>

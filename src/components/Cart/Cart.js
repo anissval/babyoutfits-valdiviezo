@@ -1,7 +1,7 @@
 import React, {useContext, useEffect} from "react";
 import {CartContext} from "../CartContext/CartContext";
 import Paper from "@material-ui/core/Paper";
-import {CircularProgress, Grid, IconButton, makeStyles} from "@material-ui/core";
+import {Button, CircularProgress, Grid, IconButton, makeStyles} from "@material-ui/core";
 import {cartStyles} from "./CartStyles";
 import {useHistory} from "react-router-dom"
 import {UserDataForm} from "../UserDataForm/UserDataForm";
@@ -14,7 +14,8 @@ export const Cart = () => {
     const {cartContent, totalAmount, removeItem} = useContext(CartContext);
     const history = useHistory();
 
-    useEffect(()=>{},[totalAmount,cartContent])
+    useEffect(() => {
+    }, [totalAmount, cartContent])
 
     const handleDeleteItem = (id) => {
         removeItem(id);
@@ -57,7 +58,7 @@ export const Cart = () => {
         (userCart.length > 0) ?
             (<div className={cartClasses.container}>
                     <Grid container item xs={12} spacing={1}>
-                        <Grid item xs={6}>
+                        <Grid item xs={12} sm={6} md={6}>
                             <Paper className={cartClasses.paper}>
                                 <div>
                                     <ul className={cartClasses.items}>
@@ -80,7 +81,7 @@ export const Cart = () => {
                                 </div>
                             </Paper>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={12} sm={6} md={6}>
                             <Paper className={cartClasses.paper}>
                                 <UserDataForm/>
                             </Paper>
@@ -89,7 +90,12 @@ export const Cart = () => {
                 </div>
             ) : (
                 <div className={cartClasses.emptyCart}><label> Tu carrito esta vacio </label>
-                    <button onClick={handleHome}>Volver</button>
+                    <Button variant="outlined" size="large" color="primary"
+                            onClick={() => {
+                                handleHome()
+                            }}>
+                        VOLVER
+                    </Button>
                 </div>
             )
     )

@@ -22,6 +22,9 @@ export const itemCountStyle = theme => {
         },
         quantity: {
             margin:'3%',
+        },
+        margin: {
+            margin: theme.spacing(1),
         }
     })
 }

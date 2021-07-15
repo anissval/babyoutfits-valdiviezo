@@ -15,6 +15,16 @@ export const ItemListContainer = (props) => {
     const {categoryID} = useParams();
 
     useEffect(() => {
+        const getProductsFromDBbyCategory = () => {
+            const productsCollection = database.collection('productos').where('category', '==', categoryID);
+            productsCollection.get().then((querySnapshot) => {
+                setProducts(processDataFromDB(querySnapshot));
+            }).catch((error) => {
+                console.log("error searching items", error);
+            }).finally(() => {
+                setShowLoading(false);
+            });
+        };
         setShowLoading(true);
         if (categoryID) {
             getProductsFromDBbyCategory();
@@ -34,16 +44,6 @@ export const ItemListContainer = (props) => {
         });
     };
 
-    const getProductsFromDBbyCategory = () => {
-        const productsCollection = database.collection('productos').where('category', '==', categoryID);
-        productsCollection.get().then((querySnapshot) => {
-            setProducts(processDataFromDB(querySnapshot));
-        }).catch((error) => {
-            console.log("error searching items", error);
-        }).finally(() => {
-            setShowLoading(false);
-        });
-    };
 
     return (
         <>

@@ -14,8 +14,8 @@ export const ItemDetail = ({product, component: CustumizedComponent}) => {
     const history = useHistory();
     const classes = useStyles();
 
-    const onAddToCard = (e) => {
-        addItem(product, e.target.value);
+    const onAddToCart = (selectedQuantity) => {
+        addItem(product, selectedQuantity);
         setShowCheckoutButtons(true);
     }
 
@@ -31,32 +31,39 @@ export const ItemDetail = ({product, component: CustumizedComponent}) => {
         return (
             <div>
                 <ul>
-                    <li style={{listStyle: 'none'}}><Button onClick={() => {
-                        handleOnclick()
-                    }}>TERMINAR
-                        MI COMPRA</Button></li>
-                    <li style={{listStyle: 'none'}}><Button onClick={handleCancel} style={{
-                        textDecoration: 'none',
-                        color: 'black'
-                    }}>CANCELAR</Button></li>
+                    <li style={{listStyle: 'none'}}>
+                        <Button variant="outlined" size="large" color="primary" onClick={() => {
+                            handleOnclick()
+                        }}>
+                            TERMINAR MI COMPRA
+                        </Button>
+                    </li>
+                    <li style={{listStyle: 'none'}}>
+                        <Button variant="outlined" size="large" color="primary" onClick={() => {
+                            handleCancel()
+                        }}>
+                            CANCELAR
+                        </Button>
+
+                    </li>
                 </ul>
 
             </div>
         )
     }
     return (
-        <Paper className={classes.paper}>
+        <Paper className={classes.paper} variant="outlined" elevation={3}>
             <div className={classes.container}>
                 <img alt={'imagen del producto'} src={product.pictureUrl} key={product.id}
                      className={classes.image}/>
                 <div className={classes.itemDescription}>
-                    <h3>{product.title}</h3>
-                    {product.description}
-                    <h4>${product.price}</h4>
+                    <label>{product.title}</label>
+                    <label>{product.description}</label>
+                    <label>${product.price}</label>
                 </div>
                 {
                     showCheckoutButtons ? groupButtons() : <CustumizedComponent stock={product.stock}
-                                                                                onAddToCard={onAddToCard} initial={0}/>
+                                                                                onAddToCart={onAddToCart} initial={0}/>
                 }
 
             </div>
