@@ -93,7 +93,7 @@ export const Cart = () => {
                     <Button variant="outlined" size="large" color="primary"
                             onClick={() => {
                                 handleHome()
-                            }}>
+                            }} className={cartClasses.margin}>
                         VOLVER
                     </Button>
                 </div>

@@ -51,7 +51,7 @@ export const UserDataForm = () => {
                 </label>
             </p>
             <p><label>
-                Mail :
+                Email :
                 <input type="text" name="email" value={email || ''} onChange={(event) => {
                     handleEMailChange(event)
                 }}/>

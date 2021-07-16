@@ -32,7 +32,7 @@ export const ItemDetail = ({product, component: CustumizedComponent}) => {
             <div>
                 <ul>
                     <li style={{listStyle: 'none'}}>
-                        <Button variant="outlined" size="large" color="primary" onClick={() => {
+                        <Button variant="outlined" size="large" color="primary" className={classes.margin} onClick={() => {
                             handleOnclick()
                         }}>
                             TERMINAR MI COMPRA

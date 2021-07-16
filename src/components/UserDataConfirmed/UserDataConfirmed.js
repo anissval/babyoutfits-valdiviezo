@@ -18,7 +18,7 @@ export const UserDataConfirmed = () => {
                 </label>
             </p>
             <p><label>
-                Mail : {userInfo.email}
+                Email : {userInfo.email}
             </label>
             </p>
         </form>

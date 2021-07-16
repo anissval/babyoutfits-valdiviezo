@@ -36,6 +36,9 @@ export const itemDetailStyles = theme => {
                     textDecoration: 'none',
                     color : 'black'
                 }
+            },
+            margin: {
+                margin: theme.spacing(1),
             }
         }
     )
